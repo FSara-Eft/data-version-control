@@ -1,0 +1,17 @@
+stages:
+  prepare:
+    cmd: python src/prepare.py
+    deps:
+    - data/raw
+    - src/prepare.py
+    outs:
+    - data/prepared/test.csv
+    - data/prepared/train.csv
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - model/model.joblib
+    - src/evaluate.py
+    metrics:
+    - metrics/accuracy.json:
+        cache: false
